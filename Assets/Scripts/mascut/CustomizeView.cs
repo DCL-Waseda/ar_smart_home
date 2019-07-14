@@ -1,67 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pose=Thalmic.Myo.Pose;
 using UnityEngine.UI;
+using UnityEngine.XR.WSA.Input;
 
 public class CustomizeView : MonoBehaviour {
 
-	public GameObject myo;
-	ThalmicMyo thalmicMyo;
-	float cooltime=0;
-	bool input_right=true;
-	int target=0;
+	GameObject FocusedObject;
+	GestureRecognizer recognizer;
+	public string key_one="Spread";
 	// Use this for initialization
-	void Start () {
-		thalmicMyo=myo.GetComponent<ThalmicMyo>();
+	void TapImage () {
+		recognizer = new GestureRecognizer();
+        recognizer.Tapped += (args) =>
+        {
+            // Send an OnSelect message to the focused object and its ancestors.
+            if (FocusedObject!= null)
+            {
+                FocusedObject.SendMessageUpwards("TappedImage");
+            }
+        };
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(!input_right){
-			cooltime--;
-			if(cooltime<0){
-				cooltime=0;
-				input_right=true;
-			}
-		}
-		//Fist();
-		WaveIn();
-		WaveOut();
+		var headPosition = Camera.main.transform.position;
+        var gazeDirection = Camera.main.transform.forward;
+        RaycastHit hitInfo;
+		if (Physics.Raycast(headPosition, gazeDirection, out hitInfo)){
+            // If the raycast hit a hologram, use that as the focused object.
+            FocusedObject = hitInfo.collider.gameObject;
+        }else{
+            // If the raycast did not hit a hologram, clear the focused object.
+            FocusedObject = null;
+        }
 	}
-	void Fist(){
-		if(thalmicMyo.pose==Pose.Fist){
-			//Enter
-			Debug.Log("Fist");
-		}
-	}
-	void WaveIn(){
-		if(thalmicMyo.pose==Pose.WaveIn&&input_right){
-			//Left
-			if(target!=0){
-				Reset();
-				target-=1;
-				transform.GetChild(target).gameObject.GetComponent<Image>().color=new Color(1,1,1,1);
-			}
-		}
-	}
-	void WaveOut(){
-		if(thalmicMyo.pose==Pose.WaveOut&&input_right){
-			//Right
-			Debug.Log("Goright");
-			if(target!=3){
-				Reset();
-				target+=1;
-				transform.GetChild(target).gameObject.GetComponent<Image>().color=new Color(1,1,1,1);
-			}
-		}
-	}
-	void Reset(){
-		foreach (Transform child in transform)
-		{
-			child.GetComponent<Image>().color=new Color(1,1,1,0.2f);
-			input_right=false;
-			cooltime=60;
+	
+	public void Reset(){
+		for(int i=0;i<4;i++){
+			transform.GetChild(i).gameObject.GetComponent<Image>().color=new Color(1,1,1,0.2f);
 		}
 	}
 }
