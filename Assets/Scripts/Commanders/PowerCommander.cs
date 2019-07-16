@@ -18,8 +18,7 @@ public class PowerCommander : MonoBehaviour {
             if (FocusedObject.transform.root.gameObject != null)
             {
                 FocusedObject.transform.root.gameObject.SendMessageUpwards("power", SendMessageOptions.DontRequireReceiver);
-                Debug.Log("TV_key Setting = "+CustomizeData.Instance.TV_key);
-                Debug.Log("AirCon_key Setting = " + CustomizeData.Instance.Aircon_key);
+                Debug.Log("TV_key Setting = "+CustomizeData.Device[0].key);
             }
         };
         recognizer.StartCapturingGestures();

@@ -16,6 +16,6 @@ public class CustomizeFlag : MonoBehaviour {
 	void TappedImage(){
 		CC.Reset();
 		image.color=new Color(1,1,1,1);
-        CustomizeData.Instance.TV_key = transform.parent.gameObject.name;
+        CustomizeData.Device[CC.now_costom].key = transform.parent.gameObject.name;
 	}
 }

@@ -8,6 +8,7 @@ public class CustomizeController : MonoBehaviour {
 
 	GameObject FocusedObject;
 	GestureRecognizer recognizer;
+    public int now_costom = 0;
 	// Use this for initialization
 	void Awake () {
 		recognizer = new GestureRecognizer();
