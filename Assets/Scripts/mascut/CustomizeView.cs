@@ -10,7 +10,7 @@ public class CustomizeView : MonoBehaviour {
 	GestureRecognizer recognizer;
 	public string key_one="Spread";
 	// Use this for initialization
-	void TapImage () {
+	void Awake () {
 		recognizer = new GestureRecognizer();
         recognizer.Tapped += (args) =>
         {
@@ -20,7 +20,8 @@ public class CustomizeView : MonoBehaviour {
                 FocusedObject.SendMessageUpwards("TappedImage");
             }
         };
-	}
+        recognizer.StartCapturingGestures();
+    }
 	
 	// Update is called once per frame
 	void Update () {

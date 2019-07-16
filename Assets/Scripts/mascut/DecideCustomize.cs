@@ -8,7 +8,7 @@ public class DecideCustomize : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		CV=transform.root.GetComponent<CustomizeView>();
+		CV=transform.parent.parent.GetComponent<CustomizeView>();
 	}
 
 	void TappedImage () {
