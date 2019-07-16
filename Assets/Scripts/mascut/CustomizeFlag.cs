@@ -6,16 +6,16 @@ using UnityEngine.UI;
 public class CustomizeFlag : MonoBehaviour {
 
 	Image image;
-    CustomizeView CV;
+    CustomizeController CC;
 	// Use this for initialization
 	void Start () {
 		image=transform.parent.gameObject.GetComponent<Image>();
-		CV=transform.parent.parent.gameObject.GetComponent<CustomizeView>();
+		CC=transform.parent.parent.gameObject.GetComponent<CustomizeController>();
 	}
 	
 	void TappedImage(){
-		CV.Reset();
+		CC.Reset();
 		image.color=new Color(1,1,1,1);
-		CV.key_one=transform.parent.gameObject.name;
+        CustomizeData.Instance.TV_key = transform.parent.gameObject.name;
 	}
 }

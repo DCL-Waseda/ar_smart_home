@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.WSA.Input;
 
-public class CustomizeView : MonoBehaviour {
+public class CustomizeController : MonoBehaviour {
 
 	GameObject FocusedObject;
 	GestureRecognizer recognizer;
-	public string key_one="Spread";
 	// Use this for initialization
 	void Awake () {
 		recognizer = new GestureRecognizer();
