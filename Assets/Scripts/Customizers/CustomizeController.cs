@@ -39,7 +39,7 @@ public class CustomizeController : MonoBehaviour {
 	
 	public void Reset(){
 		for(int i=0;i<4;i++){
-			transform.GetChild(i).gameObject.GetComponent<Image>().color=new Color(1,1,1,0.2f);
+			transform.GetChild(i).gameObject.GetComponent<Image>().color = new Color(1,1,1,0.2f);
 		}
 	}
 }

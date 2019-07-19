@@ -16,7 +16,7 @@ public class DecideCustomize : MonoBehaviour {
             case 0:
                 CustomizeData.Device[0].device_name = "TV";
                 CC.now_costom += 1;
-                SceneManager.LoadScene("prototype");//適宜移動
+                SceneManager.LoadScene("Main");//適宜移動
                 break;
             default:
                 break;
