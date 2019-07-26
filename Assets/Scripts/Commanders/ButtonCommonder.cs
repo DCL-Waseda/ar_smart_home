@@ -1,8 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.XR.WSA.Input;
 
-public class PowerCommander : MonoBehaviour {
-    public static PowerCommander Instance { get; private set; }
+public class ButtonCommonder : MonoBehaviour {
+	public static ButtonCommonder Instance { get; private set; }
     // Represents the hologram that is currently being gazed at.
     public GameObject FocusedObject { get; private set; }
     GestureRecognizer recognizer;
@@ -17,7 +17,7 @@ public class PowerCommander : MonoBehaviour {
             // Send an OnSelect message to the focused object and its ancestors.
             if (FocusedObject.transform.root.gameObject != null)
             {
-                FocusedObject.transform.root.gameObject.SendMessageUpwards("power", SendMessageOptions.DontRequireReceiver);
+                FocusedObject.transform.root.gameObject.SendMessageUpwards("button_behavior", FocusedObject.name, SendMessageOptions.DontRequireReceiver);
             }
         };
         recognizer.StartCapturingGestures();

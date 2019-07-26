@@ -34,3 +34,10 @@ sysinfo.txt
 Assets/Scripts/Const*
 # なんか証明書っぽいのも上げないように
 Assets/WSATestCertificate*
+# 拾ってきた3dモデルは上げない
+Assets/Resources/SmartObjects/
+SmartObjects.meta
+# fbxモデルexporterも上げない
+Assets/Resources/FbxExporters/
+FbxExporters.meta
+ProjectSettings/FbxExportSettings.asset
