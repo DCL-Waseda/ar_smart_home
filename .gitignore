@@ -35,8 +35,8 @@ Assets/Scripts/Const*
 # なんか証明書っぽいのも上げないように
 Assets/WSATestCertificate*
 # 拾ってきた3dモデルは上げない
-Assets/Resources/Models/
-Models.meta
+Assets/Resources/SmartObjects/
+SmartObjects.meta
 # fbxモデルexporterも上げない
 Assets/Resources/FbxExporters/
 FbxExporters.meta
