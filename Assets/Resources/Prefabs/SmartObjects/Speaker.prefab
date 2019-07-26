@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4221159243338688}
   - component: {fileID: 33389534511641274}
   - component: {fileID: 23773955671605764}
+  - component: {fileID: 65483633801413080}
   m_Layer: 0
   m_Name: Speaker
   m_TagString: Untagged
@@ -89,3 +90,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1951988459724738}
   m_Mesh: {fileID: 4300000, guid: b70a4d547a9fd0b4bbfc39cd42f618d7, type: 3}
+--- !u!65 &65483633801413080
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1951988459724738}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.81999993, y: 1.5231478, z: 1.7811419}
+  m_Center: {x: 0, y: 0, z: 0}
