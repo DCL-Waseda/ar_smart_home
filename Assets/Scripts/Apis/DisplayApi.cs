@@ -4,7 +4,6 @@ public class DisplayApi : NatureRemoApi {
 
     // Singltonパターン
     private static DisplayApi m_Instance;
-
     public static DisplayApi instance {
         get {
             if( m_Instance == null ) m_Instance = new DisplayApi();
