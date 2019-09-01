@@ -15,9 +15,10 @@ public class ButtonCommonder : MonoBehaviour {
         recognizer.Tapped += (args) =>
         {
             // Send an OnSelect message to the focused object and its ancestors.
-            if (FocusedObject.transform.root.gameObject != null)
-            {
-                FocusedObject.transform.root.gameObject.SendMessageUpwards("button_behavior", FocusedObject.name, SendMessageOptions.DontRequireReceiver);
+            if(FocusedObject != null){
+                if (FocusedObject.transform.root.gameObject != null) {
+                    FocusedObject.transform.root.gameObject.SendMessageUpwards("button_behavior", FocusedObject.name, SendMessageOptions.DontRequireReceiver);
+                }
             }
         };
         recognizer.StartCapturingGestures();
