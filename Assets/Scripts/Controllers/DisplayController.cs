@@ -22,6 +22,7 @@ public class DisplayController : Controller {
                 api.volume_down();
                 break;
             default: 
+                Debug.Log("default");
                 break;
         }
     }
