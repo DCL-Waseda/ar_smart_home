@@ -11,7 +11,11 @@ public class RoomLightController : Controller {
     
     protected override void button_behavior(string method_name){
         switch(method_name){
+            case "power": 
+                Debug.Log("power");
+                break;
             default: 
+                Debug.Log("default");
                 break;
         }
     }
