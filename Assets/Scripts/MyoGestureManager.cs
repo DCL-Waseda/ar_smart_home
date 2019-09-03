@@ -27,7 +27,11 @@ public class MyoGestureManager : MonoBehaviour {
         RaycastHit hitInfo;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo)){
             FocusedObject = hitInfo.collider.gameObject;
+			send_message(FocusedObject, "change_color", Resources.Load("Materials/focused"));
         }else{
+			if(FocusedObject != null){
+				send_message(FocusedObject, "change_color", Resources.Load("Materials/not_focused"));
+			}
             FocusedObject = null;
         }
 
@@ -62,8 +66,8 @@ public class MyoGestureManager : MonoBehaviour {
 		}
 	}
 
-	private void send_message<T>(GameObject target, string method, T operation){
-		target.SendMessageUpwards(method, operation, SendMessageOptions.DontRequireReceiver);
+	private void send_message<T>(GameObject target, string method, T arg){
+		target.SendMessageUpwards(method, arg, SendMessageOptions.DontRequireReceiver);
 	}
 
 }

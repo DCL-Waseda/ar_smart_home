@@ -19,6 +19,14 @@ public class Controller : MonoBehaviour {
         }
     }
 
+    protected void change_color(Material target){
+        Material[] targets = this.gameObject.GetComponent<Renderer>().materials;
+        for(int i = 0; i < targets.Length; i++){
+            targets[i] = target;
+        }
+        this.gameObject.GetComponent<Renderer>().materials = targets;
+    }
+
     // 各家電APIインスタンスに操作名を投げる
     protected virtual void button_behavior(string method_name){
 
