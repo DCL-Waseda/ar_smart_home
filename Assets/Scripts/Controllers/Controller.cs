@@ -9,13 +9,22 @@ public class Controller : MonoBehaviour {
         get { return is_powered; }
         set { is_powered = value; }
     }
-    protected void power_particle(){
-        if(!IsPowered){
-            this.gameObject.GetComponent<ParticleSystem>().Play();
-            IsPowered = true;
-        }else{
-            this.gameObject.GetComponent<ParticleSystem>().Stop();
-            IsPowered = false;
+    protected void switch_particle(string target_particle){
+        switch(target_particle){
+            // 電源用のparticleはオンとオフができる
+            case "power": 
+                if(!IsPowered){
+                    this.transform.Find(target_particle).gameObject.GetComponent<ParticleSystem>().Play();
+                    IsPowered = true;
+                }else{
+                    this.transform.Find(target_particle).gameObject.GetComponent<ParticleSystem>().Stop();
+                    IsPowered = false;
+                }
+                break;
+            // インタラクションに対するエフェクトのparticleは勝手に切れるのでplayだけ
+            default: 
+                this.transform.Find(target_particle).gameObject.GetComponent<ParticleSystem>().Play();
+                break;
         }
     }
 

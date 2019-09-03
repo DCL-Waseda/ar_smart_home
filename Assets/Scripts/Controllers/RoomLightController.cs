@@ -12,7 +12,7 @@ public class RoomLightController : Controller {
     protected override void button_behavior(string method_name){
         switch(method_name){
             case "power": 
-                power_particle();
+                switch_particle("power");
                 Debug.Log("power");
                 break;
             default: 
