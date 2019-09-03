@@ -41,19 +41,19 @@ public class MyoGestureManager : MonoBehaviour {
             	// ジェスチャに応じて処理を分ける
             	switch (myo_.pose) {
                 	case Pose.Fist: 
-                    	send_message(FocusedObject, "power");
+                    	send_message(FocusedObject, "button_behavior", "power");
                     	break;
                		case Pose.WaveIn: 
-						send_message(FocusedObject, "volume_down");
+						send_message(FocusedObject, "button_behavior", "volume_down");
                     	break;
                 	case Pose.WaveOut: 
-						send_message(FocusedObject, "volume_up");
+						send_message(FocusedObject, "button_behavior", "volume_up");
                     	break;
                 	case Pose.DoubleTap: 
-						send_message(FocusedObject, "");
+						send_message(FocusedObject, "button_behavior", "");
                     	break;
 					case Pose.FingersSpread: 
-						send_message(FocusedObject, "");
+						send_message(FocusedObject, "button_behavior", "");
 						break;
 					default: 
 						break;
@@ -62,8 +62,8 @@ public class MyoGestureManager : MonoBehaviour {
 		}
 	}
 
-	private void send_message(GameObject target, string operation){
-		target.SendMessageUpwards("button_behavior", operation, SendMessageOptions.DontRequireReceiver);
+	private void send_message<T>(GameObject target, string method, T operation){
+		target.SendMessageUpwards(method, operation, SendMessageOptions.DontRequireReceiver);
 	}
 
 }

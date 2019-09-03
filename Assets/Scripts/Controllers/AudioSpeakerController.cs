@@ -12,6 +12,7 @@ public class AudioSpeakerController : Controller {
     protected override void button_behavior(string method_name){
         switch(method_name){
             case "power": 
+                power_particle();
                 Debug.Log("power");
                 break;
             case "volume_up": 

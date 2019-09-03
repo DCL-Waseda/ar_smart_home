@@ -6,7 +6,7 @@ using NatureRemo;
 
 public class NatureRemoApi {
 
-    public void signal_post(string id){
+    protected void signal_post(string id){
         string uri = signal_uri(id);
         CoroutineHandler.StartStaticCoroutine(post(uri));
     }

@@ -13,6 +13,7 @@ public class DisplayController : Controller {
     protected override void button_behavior(string method_name){
         switch(method_name){
             case "power": 
+                power_particle();
                 api.power();
                 break;
             case "volume_up": 
