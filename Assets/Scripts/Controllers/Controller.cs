@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Controller : MonoBehaviour {
+    // 電源が入ったらparticleがつく
     private bool is_powered = false;
     private bool IsPowered {
         get { return is_powered; }
         set { is_powered = value; }
     }
-
     protected void power_particle(){
         if(!IsPowered){
             this.gameObject.GetComponent<ParticleSystem>().Play();
