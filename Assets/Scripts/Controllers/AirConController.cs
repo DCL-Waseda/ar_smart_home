@@ -23,9 +23,11 @@ public class AirConController : Controller {
                 Debug.Log("power");
                 break;
             case "volume_up": 
+                effect("buff");
                 Debug.Log("air_up");
                 break;
             case "volume_down": 
+                effect("debuff");
                 Debug.Log("air_down");
                 break;
             default: 

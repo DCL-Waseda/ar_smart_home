@@ -5,28 +5,27 @@ using UnityEngine;
 public class Controller : MonoBehaviour {
     // 電源が入ったらparticleがつく
     private bool is_powered = false;
-    private bool IsPowered {
+    protected bool IsPowered {
         get { return is_powered; }
         set { is_powered = value; }
     }
-    protected void switch_particle(string target_particle){
-        switch(target_particle){
-            // 電源用のparticleはオンとオフができる
-            case "power": 
-                if(!IsPowered){
-                    this.transform.Find(target_particle).gameObject.GetComponent<ParticleSystem>().Play();
-                    IsPowered = true;
-                }else{
-                    this.transform.Find(target_particle).gameObject.GetComponent<ParticleSystem>().Stop();
-                    IsPowered = false;
-                }
-                break;
-            // インタラクションに対するエフェクトのparticleは勝手に切れるのでplayだけ
-            default: 
-                this.transform.Find(target_particle).gameObject.GetComponent<ParticleSystem>().Play();
-                break;
+
+    protected void switch_power(){
+        if(!IsPowered){
+            change_color((Material)Resources.Load("Materials/powered"));
+            IsPowered = true;
+            MyoGestureManager.color_changed = true;
+        }else{
+            change_color((Material)Resources.Load("Materials/not_focused"));
+            IsPowered = false;
+            MyoGestureManager.color_changed = true;
         }
     }
+
+    protected void effect(string target_effect){
+        this.transform.Find(target_effect).gameObject.GetComponent<ParticleSystem>().Play();
+    }
+
 
     protected void change_color(Material target){
         Material[] targets = this.gameObject.GetComponent<Renderer>().materials;

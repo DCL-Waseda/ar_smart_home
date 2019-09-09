@@ -19,10 +19,12 @@ public class DisplayController : Controller {
                 break;
             case "volume_up": 
                 api.volume_up();
+                effect("buff");
                 Debug.Log("volume_up");
                 break;
             case "volume_down": 
                 api.volume_down();
+                effect("debuff");
                 Debug.Log("volume_down");
                 break;
             default: 

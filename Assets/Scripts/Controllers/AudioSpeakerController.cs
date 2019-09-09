@@ -16,9 +16,11 @@ public class AudioSpeakerController : Controller {
                 Debug.Log("power");
                 break;
             case "volume_up": 
+                effect("buff");
                 Debug.Log("volume_up");
                 break;
             case "volume_down": 
+                effect("debuff");
                 Debug.Log("volume_down");
                 break;
             default: 
