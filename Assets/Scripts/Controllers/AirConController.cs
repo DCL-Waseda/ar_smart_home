@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class AirConController : Controller {
     AirConApi api;
+    // 0: cooler, 1: warmer
+    enum Mode {
+        Cooler, 
+        Warmer
+    };
+    private Mode mode;
 
     void Start(){
         api = AirConApi.instance;
+        mode = Mode.Cooler;
     }
     
     protected override void button_behavior(string method_name){
         switch(method_name){
             case "power": 
-                switch_particle("power");
+                aircon_power();
                 Debug.Log("power");
                 break;
             case "volume_up": 
@@ -24,6 +31,33 @@ public class AirConController : Controller {
             default: 
                 Debug.Log("default");
                 break;
+        }
+    }
+
+    protected void aircon_power(){
+        if(!IsPowered){
+            change_color((Material)Resources.Load("Materials/cooler"));
+            mode = Mode.Cooler;
+            IsPowered = true;
+            MyoGestureManager.color_changed = true;
+        }else{
+            change_color((Material)Resources.Load("Materials/not_focused"));
+            IsPowered = false;
+            MyoGestureManager.color_changed = true;
+        }
+    }
+
+    private void switch_mode(){
+        if(mode == Mode.Cooler){
+            // cooler -> warmer
+            change_color((Material)Resources.Load("Materials/warmer"));
+            mode = Mode.Warmer;
+            MyoGestureManager.color_changed = true;
+        }else{
+            // warmer -> cooler
+            change_color((Material)Resources.Load("Materials/cooler"));
+            mode = Mode.Cooler;
+            MyoGestureManager.color_changed = true;
         }
     }
 }

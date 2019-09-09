@@ -14,9 +14,12 @@ public class MyoGestureManager : MonoBehaviour {
     }
 
 	private GameObject FocusedObject;
+	private GameObject OldFocusedObject;
+	private Material original_material;
 	[SerializeField] private GameObject myo;
 	private Pose lastPose_ = Pose.Unknown;
     private ThalmicMyo myo_;
+	public static bool color_changed = false;
 
 	void Start(){
 		myo_ = myo.GetComponent<ThalmicMyo>();
@@ -24,15 +27,20 @@ public class MyoGestureManager : MonoBehaviour {
 	
 	void Update() {
 		// 見ているオブジェクトの更新
+		OldFocusedObject = FocusedObject;
         RaycastHit hitInfo;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo)){
             FocusedObject = hitInfo.collider.gameObject;
-			send_message(FocusedObject, "change_color", Resources.Load("Materials/focused"));
+			if(OldFocusedObject != FocusedObject){
+				original_material = FocusedObject.GetComponent<MeshRenderer>().materials[0];
+				send_message(FocusedObject, "change_color", Resources.Load("Materials/focused"));
+			}
         }else{
-			if(FocusedObject != null){
-				send_message(FocusedObject, "change_color", Resources.Load("Materials/not_focused"));
+			if(FocusedObject != null && !color_changed){
+				send_message(FocusedObject, "change_color", original_material);
 			}
             FocusedObject = null;
+			color_changed = false;
         }
 
 		// myoジェスチャー認識
