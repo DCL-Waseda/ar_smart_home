@@ -14,21 +14,37 @@ public class MyoGestureManager : MonoBehaviour {
     }
 
 	private GameObject FocusedObject;
+	private GameObject OldFocusedObject;
+	private Material original_material;
 	[SerializeField] private GameObject myo;
 	private Pose lastPose_ = Pose.Unknown;
     private ThalmicMyo myo_;
+	public static bool color_changed = false;
 
 	void Start(){
 		myo_ = myo.GetComponent<ThalmicMyo>();
 	}
-	
+
 	void Update() {
 		// 見ているオブジェクトの更新
+		OldFocusedObject = FocusedObject;
         RaycastHit hitInfo;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo)){
             FocusedObject = hitInfo.collider.gameObject;
+			if(OldFocusedObject != FocusedObject){
+				original_material = FocusedObject.GetComponent<MeshRenderer>().materials[0];
+				send_message(FocusedObject, "change_color", Resources.Load("Materials/focused"));
+				send_message(FocusedObject, "switch_canvas", "");
+			}
         }else{
+			if(FocusedObject != null){
+				if(!color_changed){
+					send_message(FocusedObject, "change_color", original_material);
+				}
+				send_message(FocusedObject, "switch_canvas", "");
+			}
             FocusedObject = null;
+			color_changed = false;
         }
 
 		// myoジェスチャー認識
@@ -41,19 +57,19 @@ public class MyoGestureManager : MonoBehaviour {
             	// ジェスチャに応じて処理を分ける
             	switch (myo_.pose) {
                 	case Pose.Fist: 
-                    	send_message(FocusedObject, "power");
+                    	send_message(FocusedObject, "button_behavior", "make_a_fist");
                     	break;
                		case Pose.WaveIn: 
-						send_message(FocusedObject, "volume_down");
+						send_message(FocusedObject, "button_behavior", "wave_left");
                     	break;
                 	case Pose.WaveOut: 
-						send_message(FocusedObject, "volume_up");
+						send_message(FocusedObject, "button_behavior", "wave_right");
                     	break;
                 	case Pose.DoubleTap: 
-						send_message(FocusedObject, "");
+						send_message(FocusedObject, "button_behavior", "double_tap");
                     	break;
 					case Pose.FingersSpread: 
-						send_message(FocusedObject, "");
+						send_message(FocusedObject, "button_behavior", "spread_fingers");
 						break;
 					default: 
 						break;
@@ -62,8 +78,8 @@ public class MyoGestureManager : MonoBehaviour {
 		}
 	}
 
-	private void send_message(GameObject target, string operation){
-		target.SendMessageUpwards("button_behavior", operation, SendMessageOptions.DontRequireReceiver);
+	private void send_message<T>(GameObject target, string method, T arg){
+		target.SendMessageUpwards(method, arg, SendMessageOptions.DontRequireReceiver);
 	}
 
 }
