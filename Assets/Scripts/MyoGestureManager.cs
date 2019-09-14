@@ -24,7 +24,7 @@ public class MyoGestureManager : MonoBehaviour {
 	void Start(){
 		myo_ = myo.GetComponent<ThalmicMyo>();
 	}
-	
+
 	void Update() {
 		// 見ているオブジェクトの更新
 		OldFocusedObject = FocusedObject;
@@ -34,10 +34,14 @@ public class MyoGestureManager : MonoBehaviour {
 			if(OldFocusedObject != FocusedObject){
 				original_material = FocusedObject.GetComponent<MeshRenderer>().materials[0];
 				send_message(FocusedObject, "change_color", Resources.Load("Materials/focused"));
+				send_message(FocusedObject, "switch_canvas", "");
 			}
         }else{
-			if(FocusedObject != null && !color_changed){
-				send_message(FocusedObject, "change_color", original_material);
+			if(FocusedObject != null){
+				if(!color_changed){
+					send_message(FocusedObject, "change_color", original_material);
+				}
+				send_message(FocusedObject, "switch_canvas", "");
 			}
             FocusedObject = null;
 			color_changed = false;
