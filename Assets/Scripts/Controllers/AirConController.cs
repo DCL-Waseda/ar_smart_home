@@ -41,17 +41,23 @@ public class AirConController : Controller {
 
     protected override void button_behavior(string method_name){
         switch(method_name){
-            case "power": 
+            case "make_a_fist": 
                 aircon_power();
                 Debug.Log("power");
                 break;
-            case "volume_up": 
+            case "wave_right": 
                 effect("buff");
-                Debug.Log("air_up");
+                Debug.Log("temperature_up");
                 break;
-            case "volume_down": 
+            case "wave_left": 
                 effect("debuff");
-                Debug.Log("air_down");
+                Debug.Log("temperature_down");
+                break;
+            case "double_tap": 
+                Debug.Log("switch_volume");
+                break;
+            case "spread_fingers": 
+                Debug.Log("switch_mode");
                 break;
             default: 
                 Debug.Log("default");

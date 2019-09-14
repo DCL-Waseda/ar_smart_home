@@ -27,15 +27,15 @@ public class AudioSpeakerController : Controller {
     
     protected override void button_behavior(string method_name){
         switch(method_name){
-            case "power": 
+            case "make_a_fist": 
                 switch_power();
                 Debug.Log("power");
                 break;
-            case "volume_up": 
+            case "wave_right": 
                 effect("buff");
                 Debug.Log("volume_up");
                 break;
-            case "volume_down": 
+            case "wave_left": 
                 effect("debuff");
                 Debug.Log("volume_down");
                 break;

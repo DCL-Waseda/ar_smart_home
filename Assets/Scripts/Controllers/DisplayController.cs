@@ -28,20 +28,23 @@ public class DisplayController : Controller {
     // 各家電APIインスタンスに操作名を投げる
     protected override void button_behavior(string method_name){
         switch(method_name){
-            case "power": 
+            case "make_a_fist": 
                 switch_power();
                 api.power();
                 Debug.Log("power");
                 break;
-            case "volume_up": 
+            case "wave_right": 
                 api.volume_up();
                 effect("buff");
                 Debug.Log("volume_up");
                 break;
-            case "volume_down": 
+            case "wave_left": 
                 api.volume_down();
                 effect("debuff");
                 Debug.Log("volume_down");
+                break;
+            case "double_tap": 
+            Debug.Log("next channel");
                 break;
             default: 
                 Debug.Log("default");

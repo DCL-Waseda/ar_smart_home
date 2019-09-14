@@ -57,19 +57,19 @@ public class MyoGestureManager : MonoBehaviour {
             	// ジェスチャに応じて処理を分ける
             	switch (myo_.pose) {
                 	case Pose.Fist: 
-                    	send_message(FocusedObject, "button_behavior", "power");
+                    	send_message(FocusedObject, "button_behavior", "make_a_fist");
                     	break;
                		case Pose.WaveIn: 
-						send_message(FocusedObject, "button_behavior", "volume_down");
+						send_message(FocusedObject, "button_behavior", "wave_left");
                     	break;
                 	case Pose.WaveOut: 
-						send_message(FocusedObject, "button_behavior", "volume_up");
+						send_message(FocusedObject, "button_behavior", "wave_right");
                     	break;
                 	case Pose.DoubleTap: 
-						send_message(FocusedObject, "button_behavior", "");
+						send_message(FocusedObject, "button_behavior", "double_tap");
                     	break;
 					case Pose.FingersSpread: 
-						send_message(FocusedObject, "button_behavior", "");
+						send_message(FocusedObject, "button_behavior", "spread_fingers");
 						break;
 					default: 
 						break;
