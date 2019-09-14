@@ -33,10 +33,12 @@ public class AudioSpeakerController : Controller {
                 break;
             case "wave_right": 
                 effect("buff");
+                volume++;
                 Debug.Log("volume_up");
                 break;
             case "wave_left": 
                 effect("debuff");
+                volume--;
                 Debug.Log("volume_down");
                 break;
             default: 

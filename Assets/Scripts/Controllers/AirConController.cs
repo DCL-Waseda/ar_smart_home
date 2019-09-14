@@ -47,16 +47,20 @@ public class AirConController : Controller {
                 break;
             case "wave_right": 
                 effect("buff");
+                target_temperature++;
                 Debug.Log("temperature_up");
                 break;
             case "wave_left": 
                 effect("debuff");
+                target_temperature--;
                 Debug.Log("temperature_down");
                 break;
             case "double_tap": 
+                switch_volume();
                 Debug.Log("switch_volume");
                 break;
             case "spread_fingers": 
+                switch_mode();
                 Debug.Log("switch_mode");
                 break;
             default: 
@@ -89,6 +93,16 @@ public class AirConController : Controller {
             change_color((Material)Resources.Load("Materials/cooler"));
             mode = Mode.Cooler;
             MyoGestureManager.color_changed = true;
+        }
+    }
+
+    private void switch_volume(){
+        if(volume == Volume.Low){
+            volume = Volume.Mid;
+        }else if(volume == Volume.Mid){
+            volume = Volume.High;
+        }else{
+            volume = Volume.Low;
         }
     }
 

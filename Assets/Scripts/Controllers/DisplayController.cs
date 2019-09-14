@@ -35,11 +35,13 @@ public class DisplayController : Controller {
                 break;
             case "wave_right": 
                 api.volume_up();
+                volume++;
                 effect("buff");
                 Debug.Log("volume_up");
                 break;
             case "wave_left": 
                 api.volume_down();
+                volume--;
                 effect("debuff");
                 Debug.Log("volume_down");
                 break;

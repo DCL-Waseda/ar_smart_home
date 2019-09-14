@@ -8,7 +8,7 @@ public class RoomLightController : Controller {
     void Start(){
         api = RoomLightApi.instance;
     }
-    
+
     protected override void button_behavior(string method_name){
         switch(method_name){
             case "make_a_fist": 
