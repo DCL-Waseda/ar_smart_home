@@ -40,32 +40,36 @@ public class AirConController : Controller {
     }
 
     protected override void button_behavior(string method_name){
-        switch(method_name){
-            case "make_a_fist": 
-                aircon_power();
-                Debug.Log("power");
-                break;
-            case "wave_right": 
-                effect("buff");
-                target_temperature++;
-                Debug.Log("temperature_up");
-                break;
-            case "wave_left": 
-                effect("debuff");
-                target_temperature--;
-                Debug.Log("temperature_down");
-                break;
-            case "double_tap": 
-                switch_volume();
-                Debug.Log("switch_volume");
-                break;
-            case "spread_fingers": 
-                switch_mode();
-                Debug.Log("switch_mode");
-                break;
-            default: 
-                Debug.Log("default");
-                break;
+        if(method_name == "make_a_fist"){
+            aircon_power();
+            Debug.Log("power");
+            return;
+        }
+
+        if(IsPowered){
+            switch(method_name){
+                case "wave_right": 
+                    effect("buff");
+                    target_temperature++;
+                    Debug.Log("temperature_up");
+                    break;
+                case "wave_left": 
+                    effect("debuff");
+                    target_temperature--;
+                    Debug.Log("temperature_down");
+                    break;
+                case "double_tap": 
+                    switch_volume();
+                    Debug.Log("switch_volume");
+                    break;
+                case "spread_fingers": 
+                    switch_mode();
+                    Debug.Log("switch_mode");
+                    break;
+                default: 
+                    Debug.Log("default");
+                    break;
+            }
         }
     }
 
