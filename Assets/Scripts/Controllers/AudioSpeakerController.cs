@@ -26,24 +26,28 @@ public class AudioSpeakerController : Controller {
     }
     
     protected override void button_behavior(string method_name){
-        switch(method_name){
-            case "make_a_fist": 
-                switch_power();
-                Debug.Log("power");
-                break;
-            case "wave_right": 
-                effect("buff");
-                volume++;
-                Debug.Log("volume_up");
-                break;
-            case "wave_left": 
-                effect("debuff");
-                volume--;
-                Debug.Log("volume_down");
-                break;
-            default: 
-                Debug.Log("default");
-                break;
+        if(method_name == "make_a_fist"){
+            switch_power();
+            Debug.Log("power");
+            return;
+        }
+
+        if(IsPowered){
+            switch(method_name){
+                case "wave_right": 
+                    volume++;
+                    effect("buff");
+                    Debug.Log("volume_up");
+                    break;
+                case "wave_left": 
+                    volume--;
+                    effect("debuff");
+                    Debug.Log("volume_down");
+                    break;
+                default: 
+                    Debug.Log("default");
+                    break;
+            }
         }
     }
 

@@ -10,14 +10,18 @@ public class RoomLightController : Controller {
     }
 
     protected override void button_behavior(string method_name){
-        switch(method_name){
-            case "make_a_fist": 
-                switch_power();
-                Debug.Log("power");
-                break;
-            default: 
-                Debug.Log("default");
-                break;
+        if(method_name == "make_a_fist"){
+            switch_power();
+            Debug.Log("power");
+            return;
+        }
+
+        if(IsPowered){
+            switch(method_name){
+                default: 
+                    Debug.Log("default");
+                    break;
+            }
         }
     }
 }
