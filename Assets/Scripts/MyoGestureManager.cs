@@ -32,7 +32,11 @@ public class MyoGestureManager : MonoBehaviour {
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo)){
             FocusedObject = hitInfo.collider.gameObject;
 			if(OldFocusedObject != FocusedObject){
-				original_material = FocusedObject.GetComponent<MeshRenderer>().materials[0];
+				if(FocusedObject.GetComponent<MeshRenderer>() != null){
+					original_material = FocusedObject.GetComponent<MeshRenderer>().materials[0];
+				}else{
+					original_material = FocusedObject.GetComponent<Transform>().Find("0").GetComponent<MeshRenderer>().materials[0];
+				}
 				send_message(FocusedObject, "change_color", Resources.Load("Materials/focused"));
 				send_message(FocusedObject, "switch_canvas", "");
 			}
