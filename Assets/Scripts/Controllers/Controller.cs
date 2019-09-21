@@ -27,7 +27,7 @@ public class Controller : MonoBehaviour {
     }
 
 
-    protected void change_color(Material target){
+    protected virtual void change_color(Material target){
         Material[] targets = this.gameObject.GetComponent<Renderer>().materials;
         for(int i = 0; i < targets.Length; i++){
             targets[i] = target;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FanController : Controller {
     FanApi api;
@@ -12,6 +13,7 @@ public class FanController : Controller {
     private  Volume volume;
 	private GameObject canvas;
 	private GameObject text;
+    private const int CHILD_OBJECT_NUM = 16;
 
     void Awake(){
 		// canvasをfindしてアクティブ非アクティブにするが、find時はアクティブである必要がある
@@ -23,6 +25,10 @@ public class FanController : Controller {
     void Start(){
         api = FanApi.instance;
         volume = Volume.Low;
+    }
+
+    void Update(){
+        update_status_text();
     }
 
     protected override void button_behavior(string method_name){
@@ -53,5 +59,26 @@ public class FanController : Controller {
         }else{
             volume = Volume.Low;
         }
+    }
+
+    private void switch_canvas(){
+        canvas.SetActive(!canvas.activeSelf);
+    }
+
+    private void update_status_text(){
+        string txt = 
+            "volume: " + volume.ToString() + "\n";
+        text.GetComponent<Text>().text = txt;
+    }
+
+    protected override void change_color(Material target){
+        for (int i = 0; i < CHILD_OBJECT_NUM; i++){
+            GameObject child_object = this.GetComponent<Transform>().Find(i.ToString()).gameObject;
+            Material[] targets = child_object.GetComponent<Renderer>().materials;
+            for(int j = 0; j < targets.Length; j++){
+                targets[j] = target;
+            }
+            child_object.GetComponent<Renderer>().materials = targets;
+       }
     }
 }
