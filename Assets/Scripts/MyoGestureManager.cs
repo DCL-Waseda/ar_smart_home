@@ -32,13 +32,31 @@ public class MyoGestureManager : MonoBehaviour {
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo)){
             FocusedObject = hitInfo.collider.gameObject;
 			if(OldFocusedObject != FocusedObject){
-				if(FocusedObject.GetComponent<MeshRenderer>() != null){
-					original_material = FocusedObject.GetComponent<MeshRenderer>().materials[0];
+				if(OldFocusedObject == null){
+					// 何も見ていない状況からオブジェクトを見る
+					if(FocusedObject.GetComponent<MeshRenderer>() != null){
+						original_material = FocusedObject.GetComponent<MeshRenderer>().materials[0];
+					}else{
+						original_material = FocusedObject.GetComponent<Transform>().Find("0").GetComponent<MeshRenderer>().materials[0];
+					}
+					send_message(FocusedObject, "change_color", Resources.Load("Materials/focused"));
+					send_message(FocusedObject, "switch_canvas", "");
 				}else{
-					original_material = FocusedObject.GetComponent<Transform>().Find("0").GetComponent<MeshRenderer>().materials[0];
+					// ほかのオブジェクトを見ている状況からオブジェクトを見る
+					if(!color_changed){
+						send_message(OldFocusedObject, "change_color", original_material);
+					}
+					send_message(OldFocusedObject, "switch_canvas", "");
+					color_changed = false;
+
+					if(FocusedObject.GetComponent<MeshRenderer>() != null){
+						original_material = FocusedObject.GetComponent<MeshRenderer>().materials[0];
+					}else{
+						original_material = FocusedObject.GetComponent<Transform>().Find("0").GetComponent<MeshRenderer>().materials[0];
+					}
+					send_message(FocusedObject, "change_color", Resources.Load("Materials/focused"));
+					send_message(FocusedObject, "switch_canvas", "");
 				}
-				send_message(FocusedObject, "change_color", Resources.Load("Materials/focused"));
-				send_message(FocusedObject, "switch_canvas", "");
 			}
         }else{
 			if(FocusedObject != null){
@@ -47,7 +65,7 @@ public class MyoGestureManager : MonoBehaviour {
 				}
 				send_message(FocusedObject, "switch_canvas", "");
 			}
-            FocusedObject = null;
+			FocusedObject = null;
 			color_changed = false;
         }
 
