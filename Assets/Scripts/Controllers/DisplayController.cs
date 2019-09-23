@@ -29,7 +29,7 @@ public class DisplayController : Controller {
     protected override void button_behavior(string method_name){
         if(method_name == "make_a_fist"){
             switch_power();
-            api.power();
+            // api.power();
             Debug.Log("power");
             return;
         }
@@ -37,13 +37,13 @@ public class DisplayController : Controller {
         if(IsPowered){
             switch(method_name){
                 case "wave_right": 
-                    api.volume_up();
+                    // api.volume_up();
                     volume++;
                     effect("buff");
                     Debug.Log("volume_up");
                     break;
                 case "wave_left": 
-                    api.volume_down();
+                    // api.volume_down();
                     volume--;
                     effect("debuff");
                     Debug.Log("volume_down");
